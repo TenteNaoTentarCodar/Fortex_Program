@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>ExtratoComprovantes</RootNamespace>
+    <AssemblyName>ExtratoComprovantes.Core</AssemblyName>
+    <NoWarn>CS0168;CS0219;CS0414;CS0649</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="UglyToad.PdfPig"><HintPath>..\lib\UglyToad.PdfPig.dll</HintPath></Reference>
+    <Reference Include="UglyToad.PdfPig.Core"><HintPath>..\lib\UglyToad.PdfPig.Core.dll</HintPath></Reference>
+    <Reference Include="UglyToad.PdfPig.Fonts"><HintPath>..\lib\UglyToad.PdfPig.Fonts.dll</HintPath></Reference>
+    <Reference Include="UglyToad.PdfPig.Tokenization"><HintPath>..\lib\UglyToad.PdfPig.Tokenization.dll</HintPath></Reference>
+    <Reference Include="UglyToad.PdfPig.Tokens"><HintPath>..\lib\UglyToad.PdfPig.Tokens.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

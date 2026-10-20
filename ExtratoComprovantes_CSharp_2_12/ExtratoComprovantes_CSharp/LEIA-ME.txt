@@ -1,0 +1,114 @@
+﻿EXTRATO + COMPROVANTES + PLANILHA FINANCEIRA + XML -> LANÇAMENTOS CONTÁBEIS
+VERSÃO EM C# 2.12 (ETAPA 2)
+=========================================================
+
+O QUE O PROGRAMA FAZ
+- Extrato: lê OFX/OFC, PDF (texto e colunas), Excel .xlsx/.xls/.ods, CSV, HTML/XML disfarçado de .xls,
+  QIF, MT940, CAMT.053/052/054 e CNAB 240. Faz a prova do saldo quando o arquivo traz saldo inicial e final.
+- Comprovantes (PDF): aba própria; lê tipo, data, valor, favorecido, CPF/CNPJ, pagador, código de barras/ID
+  e descrição de cada página; vincula à linha do extrato (mesmo valor, data até N dias); avisa comprovante
+  repetido; células editáveis; duplo clique no arquivo mostra o texto lido.
+- Notas fiscais (XML/ZIP/pasta): NF-e, NFC-e, CT-e, CT-e OS e NFS-e (nacional, ABRASF, Nota Paulistana);
+  eventos de cancelamento; CNPJ da empresa detectado pelos XMLs; localiza cada nota/parcela no extrato
+  (vencimento ± dias, ou emissão até N dias) e também várias notas do mesmo fornecedor pagas num só débito.
+  Coluna "Nota fiscal" no extrato e filtro "Sem nota fiscal" / "Com nota fiscal".
+- Planilha financeira (Excel, CSV ou PDF, inclusive relatório "Contas e cartões" do sistema financeiro):
+  concilia um a um, agrupado (vários itens somando um débito) e recebimento líquido de gateway.
+  A quantidade de lançamentos segue o extrato; a planilha só ajuda a identificar a contrapartida.
+- Conciliação automática com a planilha (versão 2.2): ao anexar a planilha, cada linha do extrato
+  vinculada é conferida em 4 critérios — valor, data (mesmo dia), descrição (favorecido, CNPJ/CPF ou
+  descrição da planilha encontrados no histórico, comprovante ou nota) e número da NF (coluna NF/Documento
+  ou "NF 1234" na descrição, conferido com o XML vinculado, o comprovante ou o histórico).
+  Todos batendo: "✔ Conciliado" na coluna Conciliação (planilha). Algum diferente: "Divergente: ..." com o
+  critério que não bateu. Filtros "Conciliados com a planilha" e "Planilha com divergência"; resumo ao
+  anexar e em Planilha > Conciliar novamente; Planilha > Ver itens mostra a situação de cada item.
+  Planilha > "Conciliação exige NF em todos os itens": desmarcado (padrão), item sem NF na planilha
+  concilia pelos outros três critérios; marcado, fica divergente.
+  A NF da planilha também ajuda a localizar o XML certo, e em empate de valor/data vence o item cuja
+  descrição/NF bate com o extrato.
+- Classificação: regras do cliente, aprendizado, Razão, Plano de Contas, folha/adiantamento, conta/categoria
+  da planilha, transferência entre bancos e Valores a Identificar (685).
+- Adiantamento a sócio (versão 2.11): se o Plano tem conta "Adiantamento a sócio NOME" (ex.: 20094
+  ADIANTAMENTO A SOCIO JANETE..., 20146 ADIANTAMENTO A SOCIO - ENOCH ALVES), as saídas com o nome do sócio
+  no histórico vão para a conta dele — antes da memória e do Razão (só a regra do cliente e a conta da
+  planilha vêm antes). Exige o primeiro nome e todas as palavras do nome (ou 3, em nomes longos).
+- Folha e adiantamento (versão 2.12) — Cliente > Folha e adiantamento (relação de líquidos), no lugar do
+  antigo "Funcionários (quadro)": anexe a "Relação Geral dos Líquidos" do Domínio de Folha Mensal e de
+  Adiantamento (o ano todo, uma competência por página). Contas sugeridas pelo Plano (Salários a Pagar,
+  Adiantamento de Salário, Pró-labore a Pagar para os contribuintes) e intervalos de pagamento: adiantamento
+  do dia 15 ao 25 do mês da competência e folha do dia 1 ao 10 do mês seguinte (ajustáveis por cliente).
+  Saída com o nome do empregado dentro do intervalo: valor igual ao líquido = conta da folha/adiantamento
+  ("líquido confere"); valor diferente (de metade a 1,5 vez o líquido) = mesma conta, com "conferir" na
+  Observação; fora do intervalo ou valor muito diferente = classificação normal. Vem antes das regras.
+  Ao confirmar, mostra os líquidos sem pagamento localizado no período do extrato. Fica gravado nas regras.
+- Alterar contas em lote (Extrato > Alterar contas em lote, Ctrl+L, ou botão direito na tabela): escolhe
+  as linhas selecionadas, as que contêm um texto no histórico/favorecido, as sem banco/caixa ou todas da
+  tela (com filtro de sentido e de Valores a Identificar), confere na prévia e aplica a conta como
+  contrapartida, débito/crédito ou banco/caixa; pode gravar como regra do cliente.
+  Na prévia (versão 2.3): campo "Filtrar a prévia" (data, histórico, valor ou conta; vários termos =
+  todos precisam aparecer), botões Marcar todos / Desmarcar todos / Inverter marcação (valem para as
+  linhas visíveis) e clique no cabeçalho "Alterar" para marcar/desmarcar todas. O rodapé avisa quando
+  há linhas marcadas fora do filtro (elas também são alteradas).
+  Período (versão 2.4, como no e-CAC): Data inicial e Data final (pode usar só uma delas) ou "apenas a
+  data" (um dia só; substitui as outras duas). Vale junto com as opções de quais lançamentos, sentido e
+  Valores a Identificar; data inválida ou inicial maior que a final é avisada ao lado.
+  Aplicar (versão 2.8): aplica e a tela continua aberta — a tabela principal e a prévia já mostram as
+  contas novas e o rodapé confirma "✔ Aplicado: N lançamento(s)". Para sair, use Fechar (ou Esc).
+  Seleção (versão 2.9): com linha(s) selecionada(s) na tabela, a tela já abre em "Linhas selecionadas".
+  Só é alterado o que está MARCADO e VISÍVEL na prévia (linhas escondidas pelo filtro não mudam).
+  Clique na caixa "Alterar" marca/desmarca a linha; destaque linhas (clique, Ctrl ou Shift) e use
+  "Marcar só as destacadas" ou a barra de espaço. O Aplicar confirma a conta e a quantidade antes de
+  gravar; as linhas já alteradas ficam desmarcadas para a próxima aplicação.
+- Complemento do TXT: histórico + favorecido (planilha, comprovante ou nota) + número da NF.
+- Inserir / duplicar / excluir lançamentos (versão 2.7), no menu Extrato e no botão direito da tabela:
+    • Inserir lançamento (tecla Insert ou Ctrl+I): data, histórico, valor, D/C, contrapartida e banco/caixa;
+      com a contrapartida em branco o programa classifica pelas regras/Razão/Plano. Entra logo abaixo da
+      linha selecionada, com origem "Inserido manualmente", e é salvo no progresso como as demais.
+    • Duplicar lançamento (Ctrl+D): abre a inclusão preenchida com a linha selecionada.
+    • Excluir selecionados (tecla Delete): pede confirmação com quantidade e totais de D e C.
+- Regras (versão 2.6): na Nova regra e em Cliente > Editar regras o tipo aparece como D = Débito (saídas do
+  banco), C = Crédito (entradas) ou A = ambos. No arquivo de regras continua S/E/A (compatível com o Java).
+- Exportar > Exportar para Excel (análise) (versão 2.5, Ctrl+Shift+E): planilha .xlsx sem formatação,
+  só para análise (não marca nada como exportado). Escolhe todos os lançamentos, os da tela (pesquisa e
+  filtros) ou os selecionados; sentido; só Valores a Identificar; com ou sem transferências descartadas;
+  e o período como no e-CAC (data inicial/final ou apenas a data). Abas:
+    • Lançamentos: data (data real do Excel), histórico, complemento do TXT, D/C, valor e valor com sinal,
+      débito/crédito com o nome das contas, contrapartida, banco, situação, observação, comprovante,
+      nota fiscal, planilha financeira, conciliação, já exportado em e arquivo de origem;
+    • Resumo por contrapartida: quantidade, entradas, saídas e líquido por conta;
+    • Planilha financeira, Notas fiscais (uma linha por parcela) e Comprovantes, com a situação de cada um.
+- Tela principal com todos os comandos nos menus do cabeçalho; pesquisa (CNPJ, data, valor, nome ou
+  conta) vale para as três abas; soma do valor (filtrado ou não e das selecionadas).
+- Salva e abre o progresso (.ecprog) com Plano, Razão e comprovantes anexados.
+
+COMPATIBILIDADE COM A VERSÃO JAVA
+- Regras do cliente (.csv) e progresso (.ecprog): os mesmos arquivos nas duas versões.
+- TXT exportado idêntico ao da versão Java.
+
+COMO GERAR O PROGRAMA (.exe)
+1. Instale o ".NET 8.0 SDK (x64)": https://dotnet.microsoft.com/download/dotnet/8.0
+   (só no PC onde vai compilar; o .exe gerado roda em qualquer Windows 10/11 64 bits).
+2. Descompacte esta pasta e dê dois cliques em build.bat.
+   A primeira compilação baixa os componentes do .NET (precisa de internet) e leva alguns minutos.
+3. O programa fica em: publicar\ExtratoComprovantes.exe (arquivo único; copie para onde quiser).
+
+ONDE FICAM AS CONFIGURAÇÕES
+- %LOCALAPPDATA%\ExtratoComprovantes\  (preferencias.txt, log.txt, layouts_extrato.txt)
+- Menu Arquivo > "Pasta de configurações e log" abre essa pasta.
+
+ATALHOS
+- Ctrl+I adicionar extrato | Ctrl+L alterar contas em lote | Ctrl+E exportar TXT | Ctrl+S salvar | Ctrl+O abrir progresso
+- Ctrl+Shift+R carregar Razão | Ctrl+Shift+P carregar Plano | F5 classificar/conciliar novamente
+- F2 na célula Débito/Crédito ou no campo da conta banco: buscar conta no Plano
+- Arrastar arquivos para a tela: OFX vai para o extrato, XML/ZIP para as notas; PDF/Excel/CSV pergunta
+  se é extrato, planilha financeira ou comprovante (na aba Comprovantes, PDF vai direto para lá).
+
+PRÓXIMA ETAPA (continua na versão Java até lá)
+- Banco do cliente (SQLite), resgate de exportados e backup
+- Filtros por coluna estilo Excel e "Mapear colunas" de extrato desconhecido
+- Exportação Excel e conferência, Conciliação Bancária
+
+ESTRUTURA DO CÓDIGO
+- Core\  leitores (extrato, comprovantes, XML, planilha, Razão, Plano), vinculação, classificação, TXT, progresso
+- App\   telas (Windows Forms)
+- lib\   PdfPig (leitura de PDF, licença Apache 2.0 — ver PdfPig-LICENSE.txt)

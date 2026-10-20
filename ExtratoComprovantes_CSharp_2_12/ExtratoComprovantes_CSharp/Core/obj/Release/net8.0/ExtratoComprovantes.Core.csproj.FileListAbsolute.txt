@@ -1,0 +1,16 @@
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\bin\Release\net8.0\ExtratoComprovantes.Core.deps.json
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\bin\Release\net8.0\ExtratoComprovantes.Core.dll
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\bin\Release\net8.0\UglyToad.PdfPig.Core.dll
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\bin\Release\net8.0\UglyToad.PdfPig.dll
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\bin\Release\net8.0\UglyToad.PdfPig.Fonts.dll
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\bin\Release\net8.0\UglyToad.PdfPig.Tokenization.dll
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\bin\Release\net8.0\UglyToad.PdfPig.Tokens.dll
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\obj\Release\net8.0\ExtratoComprovantes.Core.csproj.AssemblyReference.cache
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\obj\Release\net8.0\ExtratoComprovantes.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\obj\Release\net8.0\ExtratoComprovantes.Core.AssemblyInfoInputs.cache
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\obj\Release\net8.0\ExtratoComprovantes.Core.AssemblyInfo.cs
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\obj\Release\net8.0\ExtratoComprovantes.Core.csproj.CoreCompileInputs.cache
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\obj\Release\net8.0\ExtratoC.924E5948.Up2Date
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\obj\Release\net8.0\ExtratoComprovantes.Core.dll
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\obj\Release\net8.0\refint\ExtratoComprovantes.Core.dll
+C:\Users\User\Downloads\ExtratoComprovantes_CSharp_2_12\ExtratoComprovantes_CSharp\Core\obj\Release\net8.0\ref\ExtratoComprovantes.Core.dll

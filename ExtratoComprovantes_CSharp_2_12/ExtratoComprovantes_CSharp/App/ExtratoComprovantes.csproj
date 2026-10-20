@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <LangVersion>7.3</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>ExtratoComprovantes</RootNamespace>
+    <AssemblyName>ExtratoComprovantes</AssemblyName>
+    <Product>Extrato - Lancamentos Contabeis</Product>
+    <Company>Fortex Solution</Company>
+    <Version>2.12.0</Version>
+    <NoWarn>CS0168;CS0219;CS0414;CS0649</NoWarn>
+    <SatelliteResourceLanguages>pt-BR</SatelliteResourceLanguages>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\ExtratoComprovantes.Core.csproj" />
+  </ItemGroup>
+</Project>
